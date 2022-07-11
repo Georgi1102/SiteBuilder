@@ -38,6 +38,7 @@ export default function Projects() {
         Authorization: `Bearer ${token}`,
       },
     });
+    //remove this to stop the delay!!!
     setTimeout(() => {
       setProjects(projects.data);
       setLoading(false);

@@ -1,3 +1,3 @@
 <?php
 
-echo "${description}";
+echo "t";

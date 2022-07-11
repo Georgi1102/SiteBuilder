@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import Button from "../components/Button";
 import Input from "../components/Input";
 import Error from "../components/Error";
 import ChooseTheme from "../components/ChooseTheme"
@@ -20,7 +19,6 @@ export default function CreateProject() {
 	const [errorName, setErrorName] = useState("");
 	const [errorDescription, setErrorDescription] = useState("");
 	const [themeActive, setThemeActive] = useState(false);
-
 
 	function checkInput() {
 		let isOk = true;
@@ -97,12 +95,10 @@ export default function CreateProject() {
 								Create
 							</Link>
 						</Auth>
-						
 					</div>
 				</div>
 			</div>
 			<ChooseTheme active={themeActive} setActive={setThemeActive} />
-
 		</div>
 	);
 }
