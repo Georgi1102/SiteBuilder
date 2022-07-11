@@ -82,60 +82,63 @@ export default function Projects() {
     console.log(projects)
   }
 
-  if (projects.length <= 0) {
 
+  if (projects.length > 0) {
     return (
-      <>
-       <div className="flex justify-center items-center flex-col h-screen bg-primary">
-				<span className="text-3xl text-secondary">It looks like you don't have projects yet!</span>
-        <span className="text-3xl text-secondary">You can make your first here:</span>
-				<Auth>
-					<Link
-						to={"/create"}
-						className="m-4 p-2 text-lg text-primary bg-secondary outline outline-2 outline-secondary rounded-md hover:bg-secondary/70"
-					>
-						Create Web Project
-					</Link>
-				</Auth>
-			</div>
-      </>
-    )
+      <div className="bg-primary ">
+        <div className="h-16"></div>
+        <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
+          <Loading loading={loading}>
+            <table className="table-auto rounded-2">
+              <thead className="">
+                <tr>
+                  <THeading data={"Id"} />
+                  <THeading data={"Name"} onClick={() => sortByName()} />
+                  <THeading data={"Description"} />
+                  <THeading data={"Date created"} />
+                  <THeading data={"Date modified"} />
+                  <THeading />
+                  <THeading />
+                </tr>
+              </thead>
+
+              <tbody>
+                {projects?.map((proj) => (
+                  <tr key={proj.id}>
+                    <TData data={proj.id} />
+                    <TData data={proj.name} />
+                    <TData data={proj.description} />
+                    <TData data={proj.createdAt} />
+                    <TData data={proj.updatedAt} />
+                    <TData data={<Button text="DELETE" onClick={() => deleteProject(proj.id)} />} />
+                    <TData data={<Button text="OPEN" onClick={() => openProject(proj.id)} />} />
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Loading>
+        </div>
+      </div>
+    );
   }
 
-  return (
-    <div className="bg-primary ">
-      <div className="h-16"></div>
-      <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
-        <Loading loading={loading}>
-          <table className="table-auto rounded-2">
-            <thead className="">
-              <tr>
-                <THeading data={"Id"} />
-                <THeading data={"Name"} onClick={() => sortByName()} />
-                <THeading data={"Description"} />
-                <THeading data={"Date created"} />
-                <THeading data={"Date modified"} />
-                <THeading />
-                <THeading />
-              </tr>
-            </thead>
+  else {
+    return (
+      <>
+        <div className="flex justify-center items-center flex-col h-screen bg-primary">
+          <span className="text-3xl text-secondary">It looks like you don't have projects yet!</span>
+          <span className="text-3xl text-secondary">You can make your first here:</span>
+          <Auth>
+            <Link
+              to={"/create"}
+              className="m-4 p-2 text-lg text-primary bg-secondary outline outline-2 outline-secondary rounded-md hover:bg-secondary/70"
+            >
+              Create Web Project
+            </Link>
+          </Auth>
+        </div>
+      </>
+    );   
+  }
 
-            <tbody>
-              {projects?.map((proj) => (
-                <tr key={proj.id}>
-                  <TData data={proj.id} />
-                  <TData data={proj.name} />
-                  <TData data={proj.description} />
-                  <TData data={proj.createdAt} />
-                  <TData data={proj.updatedAt} />
-                  <TData data={<Button text="DELETE" onClick={() => deleteProject(proj.id)} />} />
-                  <TData data={<Button text="OPEN" onClick={() => openProject(proj.id)} />} />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Loading>
-      </div>
-    </div>
-  );
 }

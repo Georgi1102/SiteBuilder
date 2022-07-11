@@ -8,6 +8,8 @@ import ChooseTheme from "../components/ChooseTheme"
 import axios from "axios";
 import { useToken } from "../hooks/useToken";
 import { useApi } from '../hooks/useApi'
+import Auth from "../components/Auth";
+import { Link } from "react-router-dom";
 
 export default function CreateProject() {
 	//const navigate = useNavigate()
@@ -86,12 +88,20 @@ export default function CreateProject() {
 								}`}
 						></Input>
 						<Error error={errorDescription}></Error>
-						<Button text={"Create"} onClick={() => createProject()} />
-
+						<Auth>
+							<Link
+								to={"/projects"}
+								onClick={() => createProject()}
+								className="m-4 p-2 flex justify-center items-center text-lg text-primary bg-secondary outline outline-2 outline-secondary rounded-md hover:bg-secondary/70"
+							>
+								Create
+							</Link>
+						</Auth>
+						
 					</div>
 				</div>
 			</div>
-			<ChooseTheme active={themeActive} setActive={setThemeActive}/>
+			<ChooseTheme active={themeActive} setActive={setThemeActive} />
 
 		</div>
 	);
